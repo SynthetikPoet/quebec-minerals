@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Klim — минералы Квебека</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M16 2 4 12l12 18 12-18z' fill='%23e8590c'/><path d='M4 12h24L16 30z' fill='%23c92a2a'/></svg>" />
+  </head>
+  <body>
+    <aside id="sidebar">
+      <header class="brand">
+        <h1>Klim</h1>
+        <p>Где искать минералы в Квебеке и окрестностях</p>
+      </header>
+
+      <div class="search">
+        <input id="search" type="search" placeholder="Найти город или место…" autocomplete="off" />
+        <ul id="search-results" hidden></ul>
+      </div>
+
+      <section>
+        <h2>Перспективность</h2>
+        <label class="row"><input type="checkbox" data-layer="heat" checked /> <span class="sw heat"></span> Тепловая карта находок</label>
+        <label class="row"><input type="checkbox" data-layer="prospective" checked /> <span class="sw" style="background:#f03e3e55;border-color:#f03e3e"></span> Перспективные зоны MRNF</label>
+        <p class="hint">Тепловая карта строится по ~10 000 рудопроявлениям SIGÉOM (рудники весят больше, чем простые проявления) и по объектам OSM в просмотренных районах. Сами точки появляются при приближении (масштаб 8+).</p>
+      </section>
+
+      <section>
+        <h2>Минеральные проявления (SIGÉOM)</h2>
+        <label class="row"><input type="checkbox" data-layer="metal" checked /> <span class="sw dot" style="background:#f2b705"></span> Металлы <small id="cnt-metal"></small></label>
+        <label class="row"><input type="checkbox" data-layer="nonmetal" checked /> <span class="sw dot" style="background:#4dabf7"></span> Неметаллы и самоцветы <small id="cnt-nonmetal"></small></label>
+        <label class="row"><input type="checkbox" data-layer="mines" /> <span class="sw dot sq" style="background:#212529"></span> Действующие рудники и проекты</label>
+        <label class="row"><input type="checkbox" data-layer="geosites" checked /> <span class="sw dot" style="background:#2f9e44"></span> Выдающиеся геосайты</label>
+        <label class="row"><input type="checkbox" data-layer="mindat" checked /> <span class="sw star">★</span> Известные места (Mindat)</label>
+        <div class="filter">
+          <select id="substance">
+            <option value="">Все вещества</option>
+          </select>
+          <label class="row compact"><input type="checkbox" id="only-worked" /> Только с выработками / рудники</label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Интересные зоны (OpenStreetMap) <span id="osm-status" class="status"></span></h2>
+        <div id="osm-legend"></div>
+        <p class="hint">Подгружаются с масштаба 11 и крупнее: приблизьтесь к городу.</p>
+      </section>
+
+      <section>
+        <h2>Геология</h2>
+        <label class="row"><input type="checkbox" data-layer="geology" /> <span class="sw" style="background:linear-gradient(90deg,#aaf6aa,#f5c3e0,#ffd27f)"></span> Геологическая карта Квебека</label>
+        <label class="row"><input type="checkbox" data-layer="macrostrat" /> <span class="sw" style="background:linear-gradient(90deg,#9ad0ff,#ffbe76,#d1a3ff)"></span> Macrostrat (вкл. США, Онтарио)</label>
+        <label class="row"><input type="checkbox" data-layer="faults" /> <span class="sw line"></span> Разломы</label>
+        <label class="row"><input type="checkbox" data-layer="outcrops" /> <span class="sw dot" style="background:#e8590c"></span> Описанные обнажения MRNF (масштаб ≥ 10)</label>
+        <label class="row"><input type="checkbox" data-layer="gravel" /> <span class="sw" style="background:#ffe066"></span> Песчано-гравийные отложения</label>
+        <p class="hint">Клик по пустому месту карты покажет породу и перспективную зону в этой точке.</p>
+      </section>
+
+      <footer class="sources">
+        Данные: <a href="https://sigeom.mines.gouv.qc.ca" target="_blank" rel="noopener">SIGÉOM / MRNF Québec</a> (CC-BY 4.0),
+        <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a>,
+        <a href="https://macrostrat.org" target="_blank" rel="noopener">Macrostrat</a>,
+        <a href="https://www.mindat.org" target="_blank" rel="noopener">Mindat</a>.
+        <span id="data-date"></span>
+      </footer>
+    </aside>
+
+    <main id="map"></main>
+
+    <div id="info" hidden>
+      <button id="info-close" aria-label="Закрыть">×</button>
+      <div id="info-body"></div>
+    </div>
+
+    <button id="toggle-sidebar" aria-label="Меню">☰</button>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

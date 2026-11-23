@@ -1,0 +1,26 @@
+{
+  "name": "klim",
+  "version": "1.0.0",
+  "description": "Карта перспективных мест для поиска минералов в Квебеке",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc",
+    "fetch-data": "tsx scripts/fetch-data.ts",
+    "start": "npm run build && vite preview"
+  },
+  "type": "module",
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "leaflet.heat": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.22",
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
+  },
+  "private": true
+}
